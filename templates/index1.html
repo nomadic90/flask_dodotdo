@@ -11,18 +11,17 @@
 
     	var socket = io.connect('http://' + document.domain + ':' + location.port + namespace);
 
-    	socket.on('connect', function(){
-    		socket.emit('my event', {data: 'I\'m connected!'});	
+    	socket.on('connected', function(msg){
+    		$('#log').append('<br>' + $('<div/>').text('message is :' + msg.data).html());
     	});
     });
-
-    <script>
     </script>
 </head>
 
 <body>
     Say anything
-
+    <h2>Receive:</h2>
+    <div id ="log"></div>
     <script>
     function hasGetUserMedia() {
     return !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
