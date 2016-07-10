@@ -38,6 +38,7 @@ def test_speak(stream):
 @socketio.on('my event', namespace = '/test')
 def test_msg(message):
 	emit('my response', {'data' : message['data']})
+	print message
 
 
 if __name__ == '__main__':

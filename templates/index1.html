@@ -12,16 +12,75 @@
     	var socket = io.connect('http://' + document.domain + ':' + location.port + namespace);
 
     	socket.on('connected', function(msg){
-    		$('#log').append('<br>' + $('<div/>').text('message is :' + msg.data).html());
+    		$('#log').append('<br>' + $('<div/>').text('message : ' + msg.data).html());
     	});
     });
+
+    // function __log(data) {
+    //     // logg.innerHTML += "\n" + e + " " + (data || '');
+    //     console.log(data)
+    // }
+
+    // var audio_context;
+    // var recorder;
+
+    // function startUserMedia(stream) {
+    // var input = audio_context.createMediaStreamSource(stream);
+    //     __log('Media stream created.');
+    //     // Uncomment if you want the audio to feedback directly
+    //     //input.connect(audio_context.destination);
+    //     //__log('Input connected to audio context destination.');
+        
+    //     recorder = new Recorder(input);
+    //     __log('Recorder initialised.');
+    // }
+
+    // window.onload = function init() {
+    // try {
+    //     // webkit shim
+    //     window.AudioContext = window.AudioContext || window.webkitAudioContext;
+    //     navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia;
+    //     window.URL = window.URL || window.webkitURL;
+      
+    //     audio_context = new AudioContext;
+    //     __log('Audio context set up.');
+    //     __log('navigator.getUserMedia ' + (navigator.getUserMedia ? 'available.' : 'not present!'));
+    //     } catch (e) {
+    //         alert('No web audio support in this browser!');
+    //     }
+    
+    //     navigator.getUserMedia({audio: true}, startUserMedia, function(e) {
+    //         __log('No live audio input: ' + e);
+    //     });
+    // };
+
+    // recorder = startUserMedia
+
+    // recorder && recorder.record();
+    // __log('Recording...');
+
+    // sleepFor(1000)
+
+    // recorder && recorder.stop();
+    // __log('Stopped recording.');
+    
+    // // create WAV download link using audio data blob
+    
+    // //recorder.clear();
+
+    // function sleepFor( sleepDuration ){
+    //     var now = new Date().getTime();
+    //     while(new Date().getTime() < now + sleepDuration){/* do nothing */} 
+    // }
+
     </script>
 </head>
 
 <body>
     Say anything
-    <h2>Receive:</h2>
+    <h2>Received:</h2>
     <div id ="log"></div>
+    <pre id ="logg"></pre>
     <script>
     function hasGetUserMedia() {
     return !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
@@ -39,9 +98,9 @@
 
     <script>
 
-    // Not showing vendor prefixes.
-    function __log(e, data) {
-        log.innerHTML += "\n" + e + " " + (data || '');
+    function __log(data) {
+        // logg.innerHTML += "\n" + e + " " + (data || '');
+        console.log(data)
     }
 
     var audio_context;
@@ -58,6 +117,43 @@
         __log('Recorder initialised.');
     }
 
+    window.onload = function init() {
+    try {
+        // webkit shim
+        window.AudioContext = window.AudioContext || window.webkitAudioContext;
+        navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia;
+        window.URL = window.URL || window.webkitURL;
+      
+        audio_context = new AudioContext;
+        __log('Audio context set up.');
+        __log('navigator.getUserMedia ' + (navigator.getUserMedia ? 'available.' : 'not present!'));
+        } catch (e) {
+            alert('No web audio support in this browser!');
+        }
+    
+        navigator.getUserMedia({audio: true}, startUserMedia, function(e) {
+            __log('No live audio input: ' + e);
+        });
+    };
+
+    recorder = startUserMedia
+
+    recorder && recorder.record();
+    __log('Recording...');
+
+    sleepFor(1000)
+
+    recorder && recorder.stop();
+    __log('Stopped recording.');
+    
+    // create WAV download link using audio data blob
+    
+    //recorder.clear();
+
+    function sleepFor( sleepDuration ){
+        var now = new Date().getTime();
+        while(new Date().getTime() < now + sleepDuration){/* do nothing */} 
+    }
     </script>
 </body>
 </html>
