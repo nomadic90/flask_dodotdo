@@ -1,5 +1,3 @@
-import pyaudio
-import time
 from flask import Flask, render_template, session, request
 from flask_socketio import SocketIO, emit, disconnect
 
@@ -10,15 +8,12 @@ app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app, async_mode=async_mode)
 thread = None
 
-WIDTH = 2
-CHANNELS = 2
-RATE = 48000
-
-p = pyaudio.PyAudio()
+outputWav = None
 
 @app.route('/')
 def index():
-    return render_template('index1.html', async_mode=socketio.async_mode)
+	return render_template('index1.html')
+	# return render_template('good_example_getusermedia_audio.html')
 
 def callback(in_data, frame_count, time_info, status):
     return (in_data, pyaudio.paContinue)
@@ -26,6 +21,7 @@ def callback(in_data, frame_count, time_info, status):
 @socketio.on('connect', namespace='/test')
 def test_connect():
     emit('connected', {'data': 'Connected'})
+    print 'connected\n'
 
 @socketio.on('disconnect', namespace='/test')
 def test_disconnect():
@@ -33,7 +29,8 @@ def test_disconnect():
 
 @socketio.on('speak', namespace = '/test')
 def test_speak(stream):
-	emit('playback', {'play_stream':stream})
+
+	emit('broadcast', {'play_stream':stream})
 
 @socketio.on('my event', namespace = '/test')
 def test_msg(message):
