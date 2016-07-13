@@ -1,17 +1,17 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-	<title> Realtime voice chat </title>
+	<title> Realtime voice chat #1 </title>
 	<script type="text/javascript" src="//code.jquery.com/jquery-1.4.2.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.5/socket.io.min.js"></script>
     <script type="text/javascript" charset="utf-8">
 
     $(document).ready(function(){
-    	namespace = '/test';
+    	namespace = '/test1/test';
 
     	var socket = io.connect('http://' + document.domain + ':' + location.port + namespace);
 
-    	socket.on('connected', function(msg){
+    	socket.on('connected #1', function(msg){
     		$('#log').append('<br>' + $('<div/>').text('message : ' + msg.data).html());
     	});
 
@@ -30,7 +30,7 @@
 </head>
 
 <body>
-    Say anything
+    Say anything #1
     <h2>Received:</h2>
     <div id ="log"></div>
     <audio id="audio" autoplay></audio>
@@ -38,7 +38,7 @@
         'use strict';
 
         //connection to localhost.
-        var namespace = '/test';
+        var namespace = '/test2/test';
         var socket = io.connect('http://' + document.domain + ':' + location.port + namespace);
 
         // returned blob will assign to this variable as a src.
@@ -57,12 +57,15 @@
             console.log('stream to string : ' + stream.toString())
 
             var output = window.URL.createObjectURL(stream);
-            console.log('output : ' + output.toString());
-            socket.emit('speak', {data : output});
+            console.log('output #1 : ' + output);
+            socket.emit('speak_to_#2', {data : output});
         }
 
 
-        socket.on('broadcast', function(audioChunk){
+        var namespace_ = '/test1/test';
+        var socket_ = io.connect('http://' + document.domain + ':' + location.port + namespace);
+        
+        socket_.on('listen1', function(audioChunk){
             console.log('chunk : ' + audioChunk.data.toString());
             var binarydata = [];
             binarydata.push(audioChunk.data);
