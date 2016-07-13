@@ -15,9 +15,6 @@ def index():
 	return render_template('index1.html')
 	# return render_template('good_example_getusermedia_audio.html')
 
-def callback(in_data, frame_count, time_info, status):
-    return (in_data, pyaudio.paContinue)
-
 @socketio.on('connect', namespace='/test')
 def test_connect():
     emit('connected', {'data': 'Connected'})
@@ -28,9 +25,9 @@ def test_disconnect():
     print('Client disconnected', request.sid)
 
 @socketio.on('speak', namespace = '/test')
-def test_speak(stream):
+def test_speak(chunk):
 
-	emit('broadcast', {'play_stream':stream})
+	emit('broadcast', {'data': chunk['data']})
 
 @socketio.on('my event', namespace = '/test')
 def test_msg(message):
@@ -40,21 +37,3 @@ def test_msg(message):
 
 if __name__ == '__main__':
     socketio.run(app, debug=True)
-
-
-# stream = p.open(format=p.get_format_from_width(WIDTH),
-#                 channels=CHANNELS,
-#                 rate=RATE,
-#                 input=True,
-#                 output=True,
-#                 stream_callback=callback)
-
-# stream.start_stream()
-
-# while stream.is_active():
-#     time.sleep(0.1)
-
-# stream.stop_stream()
-# stream.close()
-
-# p.terminate()
