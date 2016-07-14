@@ -59,24 +59,20 @@
             var output = window.URL.createObjectURL(stream);
             console.log(new Uint8Array(stream));
             console.log('output : ' + output.toString());
-            // socket.emit('speak', {data : output});
+            socket.emit('speak', {data : output});
             // socket.emit('speak', {data : stream});
 
-            var audioContext = window.AudioContext || window.webkitAudioContext;
-            var context = new audioContext();
-            var sampleRate = context.sampleRate;
-            var audioInput = context.createMediaStreamSource(stream);
+            // var audioContext = window.AudioContext || window.webkitAudioContext;
+            // var context = new audioContext();
+            // var sampleRate = context.sampleRate;
+            // var audioInput = context.createMediaStreamSource(stream);
 
-            var buffersize = 2048;
-
-            var recorder = context.createScriptProcessor(buffersize, 1, 1);
-
-            // recorder.onaudioprocess = function(stream){
-                console.log('recording..');
-                var left = stream.getChannelData(0);
-                audio.src = left;
-                // leftChannel.push(new FloatArray(left));
-            // }
+            // var buffersize = 2048;
+            // var frameCount = sampleRate * 2.0;
+            // // var buffer = context.createBuffer(2, ) 
+            // console.log(stream.inputBuffer);
+            // console.log('recording..');
+            // audio.src = stream.getChannelData(0);
 
         }
 

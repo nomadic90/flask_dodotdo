@@ -23,4 +23,4 @@ Get to know about **Flask** is first priority for this homework and using socket
 
 	ㄴ **SocketIo** is the main package building this project. Its purpose is create realtime transmission of data between web application and server.
 	
-5. Blob data in javascript turned out to be just referencing the microphone so throw blob to the server is not appropriate method for this HW. To throw the data from the microphone from the client is the most important thing. I didn't make that but creat buffer that receives data from microphone and emit the data to the server will help to make HW done successfully. I'm currently trying receiving buffer from blob or stream from microphone.
+5. Blob data in javascript turned out to be just referencing the microphone so throw blob to the server is not appropriate method for this HW. To throw the data from the microphone from the client is the most important thing. I didn't make that but creat buffer that receives data from microphone and emit the data to the server will help to make HW done successfully. I'm currently trying receiving buffer from blob or stream from microphone. For make buffer, create **audioContext** and 
