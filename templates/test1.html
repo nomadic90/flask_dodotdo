@@ -62,10 +62,10 @@
         }
 
 
-        var namespace_ = '/test1/test';
-        var socket_ = io.connect('http://' + document.domain + ':' + location.port + namespace);
-        
-        socket_.on('listen1', function(audioChunk){
+        var __namespace = '/test1/test';
+        var __socket = io.connect('http://' + document.domain + ':' + location.port + __namespace);
+
+        __socket.on('listen1', function(audioChunk){
             console.log('chunk : ' + audioChunk.data.toString());
             var binarydata = [];
             binarydata.push(audioChunk.data);

@@ -21,4 +21,6 @@ Get to know about **Flask** is first priority for this homework and using socket
 
 4. Finally success in capturing the microphone and play it. In the server part, received Blob file emited to every client. In the client part, recorded stream from microphone converted to blob type and passed to the **flask server**. And get the blob file from server and assign to **audio**'s src to play the blob file.
 
-	ㄴ **SocketIo** is the main package building this project.
+	ㄴ **SocketIo** is the main package building this project. Its purpose is create realtime transmission of data between web application and server.
+	
+5. Blob data in javascript turned out to be just referencing the microphone so throw blob to the server is not appropriate method for this HW. To throw the data from the microphone from the client is the most important thing. I didn't make that but creat buffer that receives data from microphone and emit the data to the server will help to make HW done successfully. I'm currently trying receiving buffer from blob or stream from microphone.

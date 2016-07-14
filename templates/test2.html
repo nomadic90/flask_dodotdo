@@ -59,12 +59,13 @@
             var output = window.URL.createObjectURL(stream);
             console.log('output #2 : ' + output);
             socket.emit('speak_to_#1', {data : output});
+            // socket.emit('speak_to_#1', {data : stream});
         }
 
-        var namespace_ = '/test2/test';
-        var socket_ = io.connect('http://' + document.domain + ':' + location.port + namespace);
+        var __namespace = '/test2/test';
+        var __socket = io.connect('http://' + document.domain + ':' + location.port + __namespace);
 
-        socket_.on('listen2', function(audioChunk){
+        __socket.on('listen2', function(audioChunk){
             console.log('chunk : ' + audioChunk.data.toString());
             var binarydata = [];
             binarydata.push(audioChunk.data);
